@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件处理</title>
+    <script src="../js/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="root">
+
+      <!--
+        v-on：click="xxx"===>@click="xxx"  @click是 v-on：click的语法糖
+       1、show===show1() 需要传参则用show1（参数1，$event）
+       2、$event为事件对象，如果要传参也要事件对象就需要占位
+       3、methods这个配置项专门用于写方法
+      -->
+
+      <!--
+				事件的基本使用：
+							1.使用v-on:xxx 或 @xxx 绑定事件，其中xxx是事件名；
+							2.事件的回调需要配置在methods对象中，最终会在vm上；
+							3.methods中配置的函数，不要用箭头函数！否则this就不是vm了；
+							4.methods中配置的函数，都是被Vue所管理的函数，this的指向是vm 或 组件实例对象；
+							5.@click="demo" 和 @click="demo($event)" 效果一致，但后者可以传参；
+		  -->
+      <h1>{{name}}</h1>
+      <button @click="show">点我提示信息</button>
+      <button @click="show1(99,$event)">点我提示信息2</button>
+
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#root',
+        data: {
+          name: '事件处理的基本使用',
+
+        }, methods: {//写方法的地方
+          show (event) {
+            alert('阿刚你好！!')
+            // console.log(this) //此处的this是vm
+
+          },
+          show1 (num, event) {
+            alert('阿刚你好！')
+            console.log(event);
+            // console.log(this) //此处的this是vm
+
+          }
+        },
+      })
+    </script>
+  </body>
+
+</html>
